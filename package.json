@@ -4,7 +4,7 @@
   "description": "\"# food-app-backend\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/superSatellite/food-app-backend#readme",
   "dependencies": {
+    "@google/maps": "^0.4.3",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
     "node-fetch": "^1.7.2"
   }
 }
