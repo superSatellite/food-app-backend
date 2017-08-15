@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 const express = require('express');
 const cors = require('cors');
 const mysql = require('promise-mysql');
@@ -27,12 +26,6 @@ const dataLoader = new NiteBiteDataLoader(connection);
 
 
 
-// Google Api
-const googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyCGHLFTTV-WaZ81ZXgOA2p9VOPuttiesWg',
-  Promise: Promise
-});
-
 
 // Express initialization
 const app = express();
@@ -40,7 +33,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/search', searchController(dataLoader));
+app.use('/places', searchController(dataLoader));
 
 
 
@@ -49,7 +42,7 @@ app.use('/search', searchController(dataLoader));
 // // Start the server
 // app.listen(3000)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   if (process.env.C9_HOSTNAME) {
     console.log(`Web server is listening on https://${process.env.C9_HOSTNAME}`);
