@@ -11,7 +11,6 @@ var googleMapsClient = require('@google/maps').createClient({
 // Express initialization
 const app = express();
 
-
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -22,13 +21,14 @@ app.post('/search', (req, res) => {
 
 	getLatLng(address)
 	.then(LatLng => getRestaurants(LatLng))
-	.then(data => res.send(data))
+	.then(data => res.send(data.results))
  	.catch(err => res.status(400).json(err));
 })
 
 
 function getLatLng(address) {
 	// Geocode an address with a promise
+	console.log(address, "= address")
 	return googleMapsClient.geocode({address: address}).asPromise()
 	  .then((response) => {
 	    return response.json.results[0].geometry.location;
@@ -49,11 +49,25 @@ function getRestaurants(location) {
 
 	var url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&types=${types}&openNow=false&key=${key}`;
 
+	console.log(location, "= location")
+
 	return(
 		fetch(url)
 		.then(response => response.json())
 	);
 }
+
+// googleMapsClient.placesNearby({
+// 	location: loc,
+// 	radius: 1000,
+// 	type: "restaurant",
+// ), function(err, response) (
+// 	console.log('err', err);
+// 	if (!err) {
+// 		console.log(response.json);
+// 	}
+// )
+
 
 
 // Start the server
