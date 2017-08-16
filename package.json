@@ -1,7 +1,7 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "\"# food-app-backend\"",
+  "description": "# food-app-backend",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
