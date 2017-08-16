@@ -40,10 +40,10 @@ app.use('/places', searchController(dataLoader));
 
 
 // Start the server
-app.listen(3001)
+// app.listen(3002)
 
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 app.listen(port, () => {
   if (process.env.C9_HOSTNAME) {
     console.log(`Web server is listening on https://${process.env.C9_HOSTNAME}`);
