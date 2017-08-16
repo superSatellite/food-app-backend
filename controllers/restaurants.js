@@ -18,10 +18,19 @@ module.exports = (dataLoader) => {
 	// Information for restaurants
 	restaurantController.get('/:id', (req, res) => {
 
-		console.log(req.params.id);
+		//console.log(req.params.id);
 		dataLoader.getRestaurantsInfo(req.params.id)
 		.then(data => res.send(data))
 	 	.catch(err => res.status(400).json(err))
+
+	})
+
+
+	restaurantController.post('/photo', (req, res) => {
+
+		dataLoader.getPhoto(req.body.reference)
+		.then(data => res.send(data))
+	 	.catch(err => res.status(400).json(err))		
 
 	})
 
