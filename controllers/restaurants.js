@@ -10,7 +10,7 @@ module.exports = (dataLoader) => {
 		var address = req.body.address;
 		dataLoader.getLatLng(address)
 		.then(LatLng => dataLoader.getRestaurants(LatLng))
-		.then(data => res.send(data.results))
+		.then(data => res.send(data))
 	 	.catch(err => res.status(400).json(err))
 	})
 
