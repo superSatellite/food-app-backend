@@ -5,7 +5,8 @@ const mysql = require('promise-mysql');
 
 // Express middleware
 const bodyParser = require('body-parser')
-// const morgan = require('morgan');
+const checkLoginToken = require('./lib/check-login-token.js');
+const morgan = require('morgan');
 
 
 // Data loader
@@ -14,13 +15,13 @@ const NiteBiteDataLoader = require('./lib/niteBite.js');
 
 // Controllers
 const searchController = require('./controllers/restaurants.js');
-
+const authController = require('./controllers/auth.js');
 
 // Database / data loader initialization
 const connection = mysql.createPool({
-  user: 'root',
-  password: 'root',
-  database: 'niteBite'
+  user: 'nitebite',
+  password: 'password321',
+  database: 'nitebite'
 });
 const dataLoader = new NiteBiteDataLoader(connection);
 
@@ -29,12 +30,13 @@ const dataLoader = new NiteBiteDataLoader(connection);
 
 // Express initialization
 const app = express();
-//app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(checkLoginToken(dataLoader));
 app.use(cors());
 
 app.use('/places', searchController(dataLoader));
-
+app.use('/auth', authController(dataLoader));
 
 
 
