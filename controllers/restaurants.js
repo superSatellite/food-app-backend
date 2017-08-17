@@ -14,6 +14,15 @@ module.exports = (dataLoader) => {
 	 	.catch(err => res.status(400).json(err))
 	})
 
+	//get user's address from latlng 
+	restaurantController.post('/location', (req, res) => {
+		// console.log(req.body, "req.body")
+		var latlng = req.body.latlng;
+		dataLoader.getAddressFromLatLng(latlng)
+		.then(data => res.send(data))
+	 	.catch(err => res.status(400).json(err))
+	})
+
 
 	// Information for restaurants
 	restaurantController.get('/:id', (req, res) => {
