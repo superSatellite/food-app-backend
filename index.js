@@ -40,6 +40,7 @@ app.use('/places', searchController(dataLoader));
 
 
 // Start the server
+
 app.listen(3001)
 
 
@@ -51,4 +52,5 @@ app.listen(3001)
 //     console.log(`Web server is listening on http://localhost:${port}`);
 //   }
 // });
+
 

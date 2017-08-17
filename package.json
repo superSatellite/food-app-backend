@@ -4,7 +4,8 @@
   "description": "# food-app-backend",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
     "mysql": "^2.14.1",
     "node-fetch": "^1.7.2",
     "promise-mysql": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
