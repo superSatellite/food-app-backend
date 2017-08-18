@@ -1,4 +1,5 @@
 const express = require('express');
+const onlyLoggedIn = require('../lib/only-logged-in');
 
 module.exports = (dataLoader) => {
   const restaurantController = express.Router();
@@ -43,6 +44,15 @@ module.exports = (dataLoader) => {
 
 	})
 
+	restaurantController.post('/comment', onlyLoggedIn, (req, res) => {
+
+	console.log(req.headers.authorization, "user in restaurant.js");
+  	console.log(req.body.comment, "comment in restaurant.js");
+  	console.log(req.body.placeId, "placeId in restaurant.js");
+  		
+  	});
+
+	 
 
 
 	return restaurantController;
