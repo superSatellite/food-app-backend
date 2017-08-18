@@ -16,13 +16,17 @@ module.exports = (dataLoader) => {
     
     dataLoader.createUser({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
     })
-    //.then(user => res.status(201).json(user[0]))
-    .then(data => console.log(data, "data in auth.js"))
+    .then(user => res.status(201).json(user[0]))
+    // .then(data => console.log(data, "data in auth.js"))
     .catch(err => {
       console.log(err, "401 error");
-      return res.status(401).json({"errors":{"email":["This email is already in use."]}})
+      return res.status(401).json(err)
+      // return res.status(401).json({"errors":{"email":["This email is already in use."]}})
+
     });
     
   });
