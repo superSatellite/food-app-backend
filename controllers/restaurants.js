@@ -37,7 +37,6 @@ module.exports = (dataLoader) => {
 
 
 	restaurantController.post('/photo', (req, res) => {
-
 		dataLoader.getPhoto(req.body.reference)
 		.then(data => res.send(data))
 	 	.catch(err => res.status(400).json(err))		
