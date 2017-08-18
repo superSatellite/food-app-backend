@@ -46,13 +46,22 @@ module.exports = (dataLoader) => {
 
 	restaurantController.post('/comment', onlyLoggedIn, (req, res) => {
 
-	console.log(req.headers.authorization, "user in restaurant.js");
-  	console.log(req.body.comment, "comment in restaurant.js");
-  	console.log(req.body.placeId, "placeId in restaurant.js");
-  		
+		dataLoader.postComment({
+			userId: req.user.users_id,
+			comment: req.body.comment,
+			placeId: req.body.placeId
+		})
+		.then(data => res.status(201).json(data[0]))
+    	.catch(err => res.status(400).json(err));
   	});
 
-	 
+
+	restaurantController.get('/comment/:placeId', (req, res) => {
+
+		dataLoader.getComment(req.params.placeId)
+		.then(data => res.status(201).json(data))
+    	.catch(err => res.status(400).json(err));
+  	});
 
 
 	return restaurantController;

@@ -19,9 +19,9 @@ const authController = require('./controllers/auth.js');
 
 // Database / data loader initialization
 const connection = mysql.createPool({
-  user: 'root',
-  password: 'root',
-  database: 'nitebite-alex'
+  user: 'nitebite',
+  //password: 'root',
+  database: 'nitebite'
 });
 const dataLoader = new NiteBiteDataLoader(connection);
 
