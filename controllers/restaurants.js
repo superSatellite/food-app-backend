@@ -37,7 +37,6 @@ module.exports = (dataLoader) => {
 
 
 	restaurantController.post('/photo', (req, res) => {
-
 		dataLoader.getPhoto(req.body.reference)
 		.then(data => res.send(data))
 	 	.catch(err => res.status(400).json(err))		
@@ -45,6 +44,10 @@ module.exports = (dataLoader) => {
 	})
 
 	restaurantController.post('/comment', onlyLoggedIn, (req, res) => {
+
+		// dataLoader.getComment(req.body.comment)
+		// .then(data => res.send(data))
+	 // 	.catch(err => res.status(400).json(err))
 
 	console.log(req.headers.authorization, "user in restaurant.js");
   	console.log(req.body.comment, "comment in restaurant.js");
