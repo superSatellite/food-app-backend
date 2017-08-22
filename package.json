@@ -4,7 +4,7 @@
   "description": "# food-app-backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node cluster.js",
     "dev": "nodemon index.js",
     "start:cluster": "cross-env NODE_ENV=production node cluster.js"
   },

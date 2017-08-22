@@ -22,8 +22,8 @@ module.exports = {
 
   db: {
     options: {
-      user: "root",
-      password: "",
+      user: "nitebite",
+      password: "password321",
       database: 'nitebite',
       host: 'localhost'
     }
