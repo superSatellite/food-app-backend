@@ -19,19 +19,22 @@ const authController = require('./controllers/auth.js');
 
 // Database / data loader initialization
 const connection = mysql.createPool({
+  // user: 'nitebite',
+  // // //password: 'password321',
+  // database: 'nitebite'
 
-  user: 'nitebite',
-  //password: 'password321',
-  database: 'nitebite'
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  host: process.env.DB_HOST
 
   // user: process.env.DB_USERNAME || 'nitebite',
   // password: process.env.DB_PASSWORD || 'password321',
   // database: process.env.DB_DATABASE || 'nitebite',
   // host: process.env.DB_HOST || 'localhost'
 });
+
 const dataLoader = new NiteBiteDataLoader(connection);
-
-
 
 
 // Express initialization
