@@ -8,8 +8,8 @@ module.exports = {
 
 	db: {
 		options: {
-      user: process.env.DB_USERNAME || 'nitebite',
-      password: process.env.DB_PASSWORD || 'password321',
+      user: process.env.DB_USERNAME || 'root',
+      password: process.env.DB_PASSWORD || '',
       database: process.env.DB_DATABASE || 'nitebite',
       host: process.env.DB_HOST || 'localhost'
 		}

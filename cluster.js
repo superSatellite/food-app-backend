@@ -1,29 +1,20 @@
-const express = require('express');
-const cors = require('cors');
-const mysql = require('promise-mysql');
-var cluster = require('cluster'); //no need to download anything
-var os = require('os'); //no need to download anything
+const throng = require('throng');
+const WORKERS = process.env.WEB_CONCURRENCY || 4;
 
-// config loading..
-let config		= require("./config");
+throng({
+  workers: WORKERS,
+  master: startMaster,
+  start: startWorker
+});
 
-if(cluster.isMaster) {
-  var numWorkers = os.cpus().length;
-  console.log('Master cluster setting up ' + numWorkers + ' workers...');
-
-  for(var i = 0; i < numWorkers; i++) {
-    cluster.fork();
-  }
-
-  cluster.on('online', function(worker) {
-    console.log('Worker ' + worker.process.pid + ' is online');
-  });
-
-  cluster.on('exit', function(worker, code, signal) {
-    console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
-    console.log('Starting a new worker');
-    cluster.fork();
-  });
+// This will only be called once
+function startMaster() {
+  console.log('Started master');
 }
-else
-require("./index.js");
+
+function startWorker(id) {
+  require("./index.js");
+}
+
+
+
