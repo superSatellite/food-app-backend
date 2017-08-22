@@ -22,6 +22,7 @@ const authController = require('./controllers/auth.js');
 const connection = mysql.createPool(config.db.options);
 const dataLoader = new NiteBiteDataLoader(connection);
 
+
 // Express initialization
 const app = express();
 app.use(morgan('dev'));
