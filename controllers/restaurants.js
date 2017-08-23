@@ -7,13 +7,22 @@ module.exports = (dataLoader) => {
 
 	// Search for a list of restaurants
 	restaurantController.post('/search', (req, res) => {
-
 		var address = req.body.address;
 		dataLoader.getLatLng(address)
 		.then(LatLng => dataLoader.getRestaurants(LatLng))
 		.then(data => res.send(data))
 	 	.catch(err => res.status(400).json(err))
 	})
+
+
+	// Search for a list of restaurants
+	restaurantController.post('/searchMore', (req, res) => {
+		return dataLoader.getMoreRestaurants(req.body.load_more)
+		.then(data => res.status(201).json(data))
+		.catch(err => res.status(400).json(err)) 
+	})
+
+
 
 	//get user's address from latlng 
 	restaurantController.post('/location', (req, res) => {
@@ -27,8 +36,6 @@ module.exports = (dataLoader) => {
 
 	// Information for restaurants
 	restaurantController.get('/:id', (req, res) => {
-
-		//console.log(req.params.id);
 		dataLoader.getRestaurantsInfo(req.params.id)
 		.then(data => res.send(data))
 	 	.catch(err => res.status(400).json(err))
