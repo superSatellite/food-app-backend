@@ -4,12 +4,16 @@
   "description": "# food-app-backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node cluster.js",
+    "dev": "nodemon index.js",
+    "start:cluster": "cross-env NODE_ENV=production node cluster.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/superSatellite/food-app-backend.git"
+  },
+  "config": {
+    "dbName": "nitebite"
   },
   "author": "",
   "license": "ISC",
@@ -18,20 +22,23 @@
   },
   "homepage": "https://github.com/superSatellite/food-app-backend#readme",
   "dependencies": {
+    "@google/maps": "^0.4.3",
     "bcrypt": "^1.0.2",
     "bcrypt-as-promised": "^1.1.0",
     "blueimp-md5": "^2.8.0",
+    "body-parser": "^1.17.2",
+    "chalk": "^2.1.0",
+    "cors": "^2.8.4",
+    "cross-env": "^5.0.5",
+    "express": "^4.15.4",
     "knex": "^0.13.0",
     "md5": "^2.2.1",
     "morgan": "^1.7.0",
-    "validate.js": "^0.11.1",
-    "@google/maps": "^0.4.3",
-    "body-parser": "^1.17.2",
-    "cors": "^2.8.4",
-    "express": "^4.15.4",
     "mysql": "^2.14.1",
     "node-fetch": "^1.7.2",
-    "promise-mysql": "^3.0.2"
+    "promise-mysql": "^3.0.2",
+    "throng": "^4.0.0",
+    "validate.js": "^0.11.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
