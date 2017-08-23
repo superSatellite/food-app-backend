@@ -5,14 +5,39 @@ module.exports = (dataLoader) => {
   const restaurantController = express.Router();
 
 
+	// // Search for a list of restaurants
+	// restaurantController.post('/search', (req, res) => {
+
+	// 	var address = req.body.address;
+	// 	dataLoader.getLatLng(address)
+	// 	.then(LatLng => dataLoader.getRestaurants(LatLng))
+	// 	.then(data => res.send(data))
+	//  	.catch(err => res.status(400).json(err))
+	// })
+
 	// Search for a list of restaurants
 	restaurantController.post('/search', (req, res) => {
+		console.log(req.body.load_more)
+		if(req.body.load_more){
+			return dataLoader.getMoreRestaurants(req.body.load_more)
+			.then(data => res.send(data))
+			.catch(err => res.status(400).json(err)) 
+		} 
+		else {
+			var address = req.body.address;
+			dataLoader.getLatLng(address)
+			.then(LatLng => dataLoader.getRestaurants(LatLng))
+			.then(data => res.send(data))
+		 	.catch(err => res.status(400).json(err))
+		}
+	})
 
-		var address = req.body.address;
-		dataLoader.getLatLng(address)
-		.then(LatLng => dataLoader.getRestaurants(LatLng))
-		.then(data => res.send(data))
-	 	.catch(err => res.status(400).json(err))
+
+	// Search for next page of restaurants
+	restaurantController.post('/searchMore', (req, res) => {
+		return dataLoader.getMoreRestaurants(req.body.load_more)
+		.then(data => res.status(201).json(data))
+		.catch(err => res.status(400).json(err)) 
 	})
 
 	//get user's address from latlng 
