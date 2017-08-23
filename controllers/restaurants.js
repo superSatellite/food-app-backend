@@ -4,21 +4,11 @@ const onlyLoggedIn = require('../lib/only-logged-in');
 module.exports = (dataLoader) => {
   const restaurantController = express.Router();
 
-
-	// // Search for a list of restaurants
-	// restaurantController.post('/search', (req, res) => {
-
-	// 	var address = req.body.address;
-	// 	dataLoader.getLatLng(address)
-	// 	.then(LatLng => dataLoader.getRestaurants(LatLng))
-	// 	.then(data => res.send(data))
-	//  	.catch(err => res.status(400).json(err))
-	// })
-
 	// Search for a list of restaurants
 	restaurantController.post('/search', (req, res) => {
-		console.log(req.body.load_more)
+		console.log(req.body.load_more, "load more in search")
 		if(req.body.load_more){
+			console.log(res.body, "res.body in search")
 			return dataLoader.getMoreRestaurants(req.body.load_more)
 			.then(data => res.send(data))
 			.catch(err => res.status(400).json(err)) 
@@ -35,24 +25,13 @@ module.exports = (dataLoader) => {
 
 	// Search for next page of restaurants
 	restaurantController.post('/searchMore', (req, res) => {
-		return dataLoader.getMoreRestaurants(req.body.load_more)
+		return dataLoader.getMoreRestaurants(req.body.next_page_token)
 		.then(data => res.status(201).json(data))
 		.catch(err => res.status(400).json(err)) 
 	})
-
-
-	// Search for a list of restaurants
-	restaurantController.post('/searchMore', (req, res) => {
-		return dataLoader.getMoreRestaurants(req.body.load_more)
-		.then(data => res.status(201).json(data))
-		.catch(err => res.status(400).json(err)) 
-	})
-
-
 
 	//get user's address from latlng 
 	restaurantController.post('/location', (req, res) => {
-		// console.log(req.body, "req.body")
 		var latlng = req.body.latlng;
 		dataLoader.getAddressFromLatLng(latlng)
 		.then(data => res.send(data))
