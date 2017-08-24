@@ -43,7 +43,7 @@ module.exports = (dataLoader) => {
 
 
   //Change defaultAddress
-  authController.patch('/users', onlyLoggedIn, (req, res) => {
+  authController.patch('/defaultAddress', onlyLoggedIn, (req, res) => {
 
     dataLoader.patchDefaultAddress(
       req.body.defaultAddress,
