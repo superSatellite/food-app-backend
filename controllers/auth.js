@@ -29,11 +29,21 @@ module.exports = (dataLoader) => {
   });
 
 
-  //Change defaultAddress
-  authController.patch('/users', onlyLoggedIn, (req, res) => {
+  //Checks for defaultAddress
+  authController.get('/defaultAddress', onlyLoggedIn, (req, res) =>{
     
     console.log(req.user.users_id);
-    console.log(req.body.defaultAddress);
+
+    dataLoader.getDefaultAddress(
+      req.user.users_id
+    )
+    .then(address => res.status(201).json(address[0]))
+    .catch(err => res.status(401).json(err));
+  })
+
+
+  //Change defaultAddress
+  authController.patch('/users', onlyLoggedIn, (req, res) => {
 
     dataLoader.patchDefaultAddress(
       req.body.defaultAddress,
@@ -42,6 +52,17 @@ module.exports = (dataLoader) => {
     .then(address => res.status(201).json(address[0]))
     .catch(err => res.status(401).json(err));
   });
+
+
+  //Set defaultAddress to null
+  authController.post('/defaultAddress', onlyLoggedIn, (req, res) => {
+
+    dataLoader.nullifyDefaultAddress(
+        req.user.users_id
+    )
+    .then(address => res.status(201).json(address[0]))
+    .catch(err => res.status(400).json(err));
+  })
 
 
   // Create a new session (login)
@@ -60,7 +81,7 @@ module.exports = (dataLoader) => {
     if (req.sessionToken) {
       dataLoader.deleteToken(req.sessionToken)
     .then(() => res.status(204).end())
-      .catch(err => res.status(400).json(err));
+    .catch(err => res.status(400).json(err));
     } else {
       res.status(401).json({ error: 'Invalid session token' });
     }
