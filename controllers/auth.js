@@ -30,6 +30,17 @@ module.exports = (dataLoader) => {
 
 
 
+  //Checks for defaultAddress
+  authController.get('/defaultAddress', onlyLoggedIn, (req, res) =>{
+    
+    console.log(req.user.users_id);
+
+    dataLoader.getDefaultAddress(
+      req.user.users_id
+    )
+    .then(address => res.status(201).json(address[0]))
+    .catch(err => res.status(401).json(err));
+  })
 
 
 
@@ -37,9 +48,6 @@ module.exports = (dataLoader) => {
 
   //Change defaultAddress
   authController.patch('/users', onlyLoggedIn, (req, res) => {
-    
-    console.log(req.user.users_id);
-    console.log(req.body.defaultAddress);
 
     dataLoader.patchDefaultAddress(
       req.body.defaultAddress,
