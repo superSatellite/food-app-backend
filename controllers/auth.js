@@ -29,6 +29,32 @@ module.exports = (dataLoader) => {
   });
 
 
+
+
+
+
+
+
+  //Change defaultAddress
+  authController.patch('/users', onlyLoggedIn, (req, res) => {
+    
+    console.log(req.user.users_id);
+    console.log(req.body.defaultAddress);
+
+    dataLoader.patchDefaultAddress(
+      req.body.defaultAddress,
+      req.user.users_id
+    )
+    .then(address => res.status(201).json(address[0]))
+    .catch(err => res.status(401).json(err));
+  });
+
+
+
+
+
+
+
   // Create a new session (login)
   authController.post('/sessions', (req, res) => {
     dataLoader.createTokenFromCredentials(
