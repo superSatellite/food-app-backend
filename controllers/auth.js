@@ -11,9 +11,7 @@ module.exports = (dataLoader) => {
 
   // Create a new user (signup)
   authController.post('/users', (req, res) => {
-    
-    console.log(req.body, "req.body");
-    
+        
     dataLoader.createUser({
       email: req.body.email,
       password: req.body.password,
@@ -26,20 +24,9 @@ module.exports = (dataLoader) => {
       console.log(err, "401 error");
       return res.status(401).json(err)
       // return res.status(401).json({"errors":{"email":["This email is already in use."]}})
-
     });
     
   });
-
-
-  // // Checking user profile
-  // authController.get('/profile', (req, res) => {
-
-  //   // dataLoader.getProfile(req.user.users_id)
-  //   dataLoader.getProfile(req.user.users_id)
-  //   .then(profile => res.status(201).json(profile[0]))
-  //   .catch(err => res.status(401).json(err));
-  // });
 
 
   // Create a new session (login)
