@@ -32,6 +32,16 @@ module.exports = (dataLoader) => {
   });
 
 
+  // Checking user profile
+  authController.get('/profile', onlyLoggedIn, (req, res) => {
+
+    console.log("Connected");
+    // dataLoader.getProfile(req.user.users_id)
+    // .then(profile => res.status(201).json(profile))
+    // .catch(err => res.status(401).json(err));
+  });
+
+
   // Create a new session (login)
   authController.post('/sessions', (req, res) => {
     dataLoader.createTokenFromCredentials(
