@@ -29,12 +29,6 @@ module.exports = (dataLoader) => {
   });
 
 
-
-
-
-
-
-
   //Change defaultAddress
   authController.patch('/users', onlyLoggedIn, (req, res) => {
     
@@ -48,11 +42,6 @@ module.exports = (dataLoader) => {
     .then(address => res.status(201).json(address[0]))
     .catch(err => res.status(401).json(err));
   });
-
-
-
-
-
 
 
   // Create a new session (login)
