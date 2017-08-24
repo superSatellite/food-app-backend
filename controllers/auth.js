@@ -32,14 +32,14 @@ module.exports = (dataLoader) => {
   });
 
 
-  // Checking user profile
-  authController.get('/profile', onlyLoggedIn, (req, res) => {
+  // // Checking user profile
+  // authController.get('/profile', (req, res) => {
 
-    console.log("Connected");
-    // dataLoader.getProfile(req.user.users_id)
-    // .then(profile => res.status(201).json(profile))
-    // .catch(err => res.status(401).json(err));
-  });
+  //   // dataLoader.getProfile(req.user.users_id)
+  //   dataLoader.getProfile(req.user.users_id)
+  //   .then(profile => res.status(201).json(profile[0]))
+  //   .catch(err => res.status(401).json(err));
+  // });
 
 
   // Create a new session (login)
@@ -79,6 +79,8 @@ module.exports = (dataLoader) => {
         return {
           "id": result.users_id,
           "email": result.users_email,
+          "firstName": result.users_firstName,
+          "lastName": result.users_lastName,
           "users_createdAt": result.users_createdAt,
           "users_updatedAt": result.users_updatedAt
         }
